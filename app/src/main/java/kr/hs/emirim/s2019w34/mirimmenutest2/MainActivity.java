@@ -1,5 +1,6 @@
 package kr.hs.emirim.s2019w34.mirimmenutest2;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -8,17 +9,24 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.MenuInflater;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
-
+    LinearLayout baseLayout;
+    Button btn1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("옵션메뉴 만들기");
+        baseLayout = findViewById(R.id.baseLayout);
+        btn1 = findViewById(R.id.btn1);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -35,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater mInflater = getMenuInflater();
+        mInflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -44,13 +53,22 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.item1:
+
+                return true;
+            case R.id.item2:
+                baseLayout.setBackgroundColor(Color.GREEN);
+                return true;
+            case R.id.item3:
+                baseLayout.setBackgroundColor(Color.BLUE);
+                return true;
+            case R.id.rotate_55:
+                btn1.setRotation(55);
+                return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 }
